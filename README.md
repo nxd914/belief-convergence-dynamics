@@ -91,7 +91,7 @@ to examine the relationship between:
 - Post-resolution attention decay
 
 Included Google Trends files:
-- `cuomo_grends_timeline.csv` *(filename preserved as uploaded)*
+- `cuomo_grends_timeline.csv` 
 - `pope_gtrends_timeline.csv`
 - `epstein_gtrends_timeline.csv`
 
