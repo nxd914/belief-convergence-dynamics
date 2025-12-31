@@ -1,92 +1,121 @@
 # Belief Dynamics
 
-Learning, Convergence, and Collapse in Human Forecasting Systems
+**Learning, Convergence, and Collapse in Human Forecasting Systems**
 
-## Research Overview
+## Overview
 
-This repository studies how collective beliefs evolve over time in real-world forecasting systems. Rather than treating market prices as financial signals, we interpret them as probabilistic belief states—dynamic estimates produced by many agents operating under uncertainty.
+This repository studies how collective beliefs evolve over time in real-world forecasting environments.
 
-The central focus is not prediction accuracy, but belief dynamics:
+Rather than treating prediction market prices as financial signals, we interpret them as **probabilistic belief states**—dynamic estimates produced by many agents operating under uncertainty.
 
+The core objective is not prediction accuracy, but **belief dynamics**:
 - How uncertainty is reduced
-- How competing hypotheses are eliminated
-- How belief systems transition from exploration to certainty
+- How competing hypotheses coexist and are eliminated
+- How belief systems transition from disagreement to consensus
+- When convergence occurs—and when it fails to occur
 
 Prediction markets serve as a measurement device for these processes, providing high-frequency, incentive-aligned traces of human belief updating.
 
 ## Core Research Question
 
-**How do collective belief systems converge—and sometimes collapse—when exposed to discrete information shocks?**
+**How do collective belief systems converge—and sometimes fail to converge—when exposed to discrete information shocks?**
 
-We approach this question by modeling belief evolution as a stochastic process with absorbing states, where uncertainty collapses into near-certainty once sufficient information is revealed.
+We study belief evolution as a stochastic process with possible absorbing states, where uncertainty collapses into near-certainty once sufficient information is revealed.
 
-## Conceptual Grounding
+## Conceptual Framing
 
-This project is grounded in a structured synthesis of literature on:
-
+This project is grounded in ideas from:
 - Bayesian updating and belief aggregation
 - Prediction markets and information efficiency
+- Collective learning under uncertainty
 - Failure modes of human forecasting systems
 
-NotebookLM is used explicitly as a research support tool to extract assumptions, known limitations, and conceptual frameworks from prior work. All interpretations and formalizations are human-authored and critically evaluated.
+Belief trajectories are treated as objects of study, not inputs to trading strategies.
 
-Key themes identified include:
+## Empirical Approach
 
-- Delayed belief updating under uncertainty
-- Abrupt belief revision following credible signals
-- Structural inertia due to liquidity, coordination, and institutional constraints
+### Data Source
 
-## Empirical Case Study: Federal Reserve Rate Cut Markets
+We analyze historical Kalshi prediction markets, focusing exclusively on finalized (resolved) markets.
 
-As an empirical substrate, we analyze Federal Reserve interest rate prediction markets. These markets are well-suited for studying belief dynamics because:
+These markets are well-suited for belief analysis because:
+- Information arrives in bursts (announcements, votes, decisions)
+- Multiple competing hypotheses coexist
+- Outcomes resolve discretely
+- Belief collapse (or non-collapse) can be clearly observed
 
-- Information arrives in bursts (FOMC meetings, speeches)
-- Multiple competing hypotheses coexist (e.g., 2 vs. 3 vs. 4 cuts)
-- Outcomes resolve discretely, enabling clear observation of convergence
+### What We Measure
 
-Market price trajectories are treated as belief paths, not investment signals.
+For each market, we extract a high-frequency belief trace and compute diagnostic metrics, including:
+- **Belief volatility** (average magnitude of belief updates)
+- **Maximum belief jump** (largest single update)
+- **Inactivity fraction** (periods of belief stasis)
+- **Collapse time** (if and when belief enters a high-certainty absorbing state)
 
-## Observed Belief Phenomena
+Importantly, collapse is not assumed—it is detected.
 
-Across examined markets, we observe recurring structural patterns:
+## Key Findings
 
-- Gradual belief drift during periods of weak or ambiguous information
-- Abrupt belief collapse following decisive announcements
-- Absorbing states where uncertainty vanishes and prices stabilize near certainty
-- Liquidity decay once disagreement is eliminated
+Across examined cases, we observe distinct belief regimes:
 
-These behaviors align closely with theoretical expectations from the belief aggregation literature.
+### 1. Collapse Dynamics
 
-## Modeling Perspective
+Some belief systems exhibit:
+- Extended disagreement
+- Sparse or delayed updating
+- Abrupt belief collapse following decisive information
+- Rapid stabilization near certainty
 
-Rather than optimizing predictive accuracy, we focus on characterization:
+### 2. Non-Collapse Dynamics
 
-- Belief volatility and decay
-- Update frequency and inactivity regimes
-- Transitions between exploratory and settled belief states
+Other systems show:
+- Continuous belief movement
+- Persistent disagreement
+- No absorbing state prior to resolution
+- Ongoing uncertainty even late in the timeline
 
-This framing emphasizes learning dynamics, making the project relevant to machine learning, statistical inference, and computational social science.
+The existence of both regimes suggests that belief convergence is not guaranteed, even in incentive-aligned environments.
+
+## What This Project Is Not
+
+To avoid confusion, this repository explicitly makes **no claims** about:
+- Trading strategies
+- Alpha generation
+- Forecasting superiority
+- Market inefficiency exploitation
+
+This is a descriptive and analytical study of learning dynamics, not a financial system.
 
 ## Technical Implementation
 
-The repository includes a robust data pipeline for extracting high-frequency belief trajectories from the Kalshi v2 API using secure RSA-PSS authentication.
+The codebase provides:
+- Secure access to Kalshi's v2 API using RSA-PSS authentication
+- A reusable, domain-agnostic pipeline for extracting belief traces
+- Clean CSV exports for reproducibility
+- Lightweight analysis and visualization tools
 
-The codebase exists to:
+The same pipeline is applied unchanged across all case studies; only the market identifiers differ.
 
-- Enable reproducible empirical analysis
-- Support diagnostic visualization
-- Export clean time-series data for further study
+## Reproducibility
 
-The technical stack is intentionally lightweight and transparent.
+Each case study consists of:
+- A finalized market identifier
+- A fixed observation window
+- A belief trace CSV
+- Deterministic analysis code
 
-## Research Scope & Non-Claims
-
-- **Not a trading system**: No strategies are optimized for profit
-- **Not outcome prediction**: The goal is to study belief formation, not to forecast economic events
-- **Case-study driven**: Empirical results illustrate general dynamics rather than universal laws
+All results can be reproduced by re-running the notebooks top-to-bottom.
 
 ## Future Directions
 
-- Comparative analysis of converging vs. collapsing belief trajectories
-- Cross-domain validation in other forecasting environments
+Planned extensions include:
+- Comparative analysis across many domains
+- Cross-case clustering of belief dynamics
+- Integration of external attention signals (e.g., search interest)
 - Formal links to stochastic learning models and Bayesian convergence theory
+
+## High-Level Takeaway
+
+Even when incentives are aligned and information is public, collective belief systems can behave very differently—sometimes converging abruptly, sometimes never fully agreeing at all.
+
+This repository provides a framework for measuring and comparing those dynamics.
